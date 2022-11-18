@@ -10,6 +10,30 @@ class CartItem extends React.Component {
             img: ''
         }
         //this.increaseQuantity = this.increaseQuantity.bind(this);
+        //when previous state is required we use function
+        this.increaseQuantity = ()=>{
+            this.setState((prevState)=>{
+                return {
+                    qty: prevState.qty+1
+                }
+            });
+        }
+        this.decreaseQuantity = ()=>{
+            this.setState((prevState)=>{
+                if(prevState.qty >0)
+                return {
+                    qty: prevState.qty-1
+                }
+            });
+        }
+        this.deleteQuantity = ()=>{
+            this.setState((prevState)=>{
+                if(prevState.qty >0)
+                return {
+                    qty: prevState.qty-1
+                }
+            });
+        }
     }
     increaseQuantity = () => {
         console.log('this',this.state);
