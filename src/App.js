@@ -37,6 +37,7 @@ componentDidMount(){
   // })
   this.db
   .collection('products')
+  .orderBy('price')
   .onSnapshot((snapshot)=>{
     console.log(snapshot);
     snapshot.docs.map((doc)=>{
@@ -97,13 +98,19 @@ handleDecreaseQuantity= (product)=>{
     
    
 handleDeleteQuantity = (id)=>{
-const{products} = this.state;
-const items = products.filter
-        ((item)=>item.id!==id);
-    this.setState({
-        products:items
-    })
-}
+const docRef = this.db.collection('products').doc(id);
+docRef
+ .delete()
+ .then(()=>{
+  console.log('deleted product');
+})
+.catch(err=>{
+  console.log('error deleting product',err);
+});
+
+ }
+
+
 getCount = ()=>{
   const{products} = this.state;
   let count = 0;
